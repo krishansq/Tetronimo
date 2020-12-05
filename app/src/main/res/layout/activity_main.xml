@@ -44,7 +44,7 @@
     </LinearLayout>
 
 
-    <View
+    <com.example.tetronimo.TetGameView
         android:id="@+id/XMLGAMEVIEW"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"

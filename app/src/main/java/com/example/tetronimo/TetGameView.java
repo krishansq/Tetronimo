@@ -6,14 +6,11 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.view.Display;
-import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.WindowManager;
 
-public class TetGameView extends SurfaceView implements Runnable {
-    private boolean mRunning;
+public class TetGameView extends SurfaceView {
+   // private boolean mRunning;
     Paint paint = new Paint();
     private MainThread mGameThread;
     private GameState mGameState;
@@ -38,52 +35,15 @@ public class TetGameView extends SurfaceView implements Runnable {
     private void init(Context context) {
         mContext = context;
         mSurfaceHolder = getHolder();
-        mGameThread = new MainThread(this);
         setFocusable(true);
         mGameState = new GameState();
-    }
-
-    @Override
-    public void run()
-    {
-        Canvas canvas;
-        if (mSurfaceHolder.getSurface().isValid()) {
-            canvas = mSurfaceHolder.lockCanvas();
-            canvas.save();
-
-        }
-
-            while (mRunning)
-            {
-
-                canvas = null;
-
-                try {
-                    canvas = this.mSurfaceHolder.lockCanvas();
-                    synchronized (mSurfaceHolder) {
-                        update();
-                        draw(canvas);
-                    }
-                } catch (Exception e1) {
-                    e1.printStackTrace();
-                } finally {
-                    if (canvas != null) {
-                        try {
-                            mSurfaceHolder.unlockCanvasAndPost(canvas);
-                        } catch (Exception e2) {
-                            e2.printStackTrace();
-                        }
-                    }
-                }
-            }
-
     }
 
 
 
 
     public void pause() {
-        mRunning = false;
+        mGameThread.setRunning(false);
         try {
             // Stop the thread (rejoin the main thread)
             mGameThread.join();
@@ -92,15 +52,15 @@ public class TetGameView extends SurfaceView implements Runnable {
     }
 
     public void resume() {
-        mRunning = true;
-        mGameThread = new MainThread(this);
+
+        mGameThread = new MainThread(this, mSurfaceHolder);
+        mGameThread.setRunning(true);
         mGameThread.start();
     }
 
     public void update()
     {
         mGameState.update();
-
     }
 
     @Override
@@ -109,7 +69,7 @@ public class TetGameView extends SurfaceView implements Runnable {
         int colDivider = this.getMeasuredWidth() / 10;
 
         super.draw(canvas);
-        paint.setColor(Color.BLACK);
+        paint.setColor(Color.CYAN);
         paint.setStrokeWidth(3);
         for(int i = 0; i < 24; i++)
         {
@@ -123,33 +83,6 @@ public class TetGameView extends SurfaceView implements Runnable {
     }
 
 }
-
-//    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-//
-//    }
-//
-//
-//    public void surfaceCreated(SurfaceHolder holder) {
-//        thread.setRunning(true);
-//        thread.start();
-////        int x = 1;
-////        int y = 0;
-////        int z = x / y;
-//    }
-//
-//
-//    public void surfaceDestroyed(SurfaceHolder holder) {
-//        boolean retry = true;
-//        while (retry) {
-//            try {
-//                thread.setRunning(false);
-//                thread.join();
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//            retry = false;
-//        }
-//    }
 
 
 
