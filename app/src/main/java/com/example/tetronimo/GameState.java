@@ -17,6 +17,12 @@ public class GameState
         }
     }
 
+    public void update()
+    {
+
+    }
+
+
 
 
 

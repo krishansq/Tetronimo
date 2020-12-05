@@ -6,30 +6,33 @@ import android.view.SurfaceHolder;
 public class MainThread extends Thread
 {
     private SurfaceHolder surfaceHolder;
-    private GameView gameView;
-    private boolean running;
+    private TetGameView gameView;
+    private boolean mRunning;
     public static Canvas canvas;
 
-    public MainThread(SurfaceHolder surfaceHolder, GameView gameView)
+    public MainThread(TetGameView gameView)
     {
         super();
         this.surfaceHolder = surfaceHolder;
+        this.gameView = gameView;
     }
 
     @Override
     public void run()
     {
-        while (running)
+        while (mRunning)
         {
+
             canvas = null;
 
             try {
                 canvas = this.surfaceHolder.lockCanvas();
                 synchronized (surfaceHolder) {
-                    //update();
-                    //draw(canvas);
+                   //update();
+                    gameView.draw(canvas);
                 }
             } catch (Exception e1) {
+                e1.printStackTrace();
             }
             finally
             {
@@ -46,7 +49,7 @@ public class MainThread extends Thread
     }
     public void setRunning(boolean isRunning)
     {
-        running = isRunning;
+        mRunning = isRunning;
     }
 
 }

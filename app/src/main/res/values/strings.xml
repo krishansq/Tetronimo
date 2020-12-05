@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Tetronimo</string>
+    <string name="tetronimo">Tetronimo</string>
 </resources>
