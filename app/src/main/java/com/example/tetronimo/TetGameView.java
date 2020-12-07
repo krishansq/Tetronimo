@@ -60,28 +60,26 @@ public class TetGameView extends SurfaceView {
 
     public void update()
     {
-        mGameState.update();
+        mGameState.clearBoard();
     }
 
     @Override
     public void draw(Canvas canvas) {
-        float rectHeight = (float)this.getMeasuredHeight() / mGameState.ROWS;
-        float rectWidth = (float)this.getMeasuredWidth() / mGameState.COLS;
+        int rowDivider = this.getMeasuredHeight() / 24;
+        int colDivider = this.getMeasuredWidth() / 10;
+
         super.draw(canvas);
         paint.setColor(Color.CYAN);
-
-        for(int i = 0; i < mGameState.ROWS; i++)
+        paint.setStrokeWidth(3);
+        for(int i = 0; i < 24; i++)
         {
-            for(int j = 0; j < mGameState.COLS; j++)
-            {
-                if(mGameState.getGameBoard()[i][j] == 0)
-                {
-                    canvas.drawRect(j * rectWidth, i * rectHeight, (j + 1) * rectWidth, (i + 1) * rectHeight, paint);
-                }
-            }
+            canvas.drawLine(0, i*rowDivider, this.getMeasuredWidth(), i*rowDivider, paint);
         }
 
-
+        for(int i = 0; i < 10; i++)
+        {
+            canvas.drawLine(i*colDivider, 0, i*colDivider, this.getMeasuredHeight(), paint);
+        }
     }
 
 }
