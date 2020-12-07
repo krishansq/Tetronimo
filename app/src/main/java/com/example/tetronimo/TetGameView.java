@@ -9,7 +9,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 public class TetGameView extends SurfaceView {
-   // private boolean mRunning;
+    //private boolean mRunning;
     Paint paint = new Paint();
     private MainThread mGameThread;
     private GameState mGameState;
@@ -59,14 +59,23 @@ public class TetGameView extends SurfaceView {
 
     public void update()
     {
-//        mGameState.clearBoard();
+
+        if(!mGameState.checkGame(mGameState.getCurrentPiece()))
+        {
+            mGameState.placePiece(mGameState.getCurrentPiece());
+
+        }
+        else{
+        }
     }
+
 
     @Override
     public void draw(Canvas canvas) {
         float rectHeight = (float)this.getMeasuredHeight() / mGameState.ROWS;
         float rectWidth = (float)this.getMeasuredWidth() / mGameState.COLS;
         super.draw(canvas);
+        canvas.drawARGB(40, 25, 125, 55);
         paint.setColor(Color.CYAN);
 
         for(int i = 0; i < mGameState.ROWS; i++)
@@ -82,6 +91,36 @@ public class TetGameView extends SurfaceView {
 
 
     }
+
+    public void buttonMove(int buttonID) {
+        switch (buttonID) {
+            case 1:
+
+                mGameState.moveLeft(mGameState.getCurrentPiece());
+                break;
+
+            case 2:
+
+                mGameState.moveDown(mGameState.getCurrentPiece());
+                break;
+
+            case 3:
+
+                mGameState.moveUp(mGameState.getCurrentPiece());
+                break;
+
+            case 4:
+
+                mGameState.moveRight(mGameState.getCurrentPiece());
+                break;
+//
+//            case 5:
+//
+//                mGameState.Drop(mGameState.getCurrentPiece());
+//                break;
+        }
+    }
+
 
 }
 

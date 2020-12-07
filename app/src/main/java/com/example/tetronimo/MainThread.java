@@ -3,6 +3,8 @@ package com.example.tetronimo;
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;
 
+import java.util.TimerTask;
+
 public class MainThread extends Thread
 {
     private SurfaceHolder mSurfaceHolder;
@@ -17,22 +19,19 @@ public class MainThread extends Thread
         this.mGameView = gameView;
     }
 
-    @Override
-    public void run()
+    public void run ()
     {
 
-        while (mRunning)
-        {
+        while (mRunning) {
 
             mCanvas = null;
-            if (mSurfaceHolder.getSurface().isValid())
-            {
+            if (mSurfaceHolder.getSurface().isValid()) {
 
                 try {
                     mCanvas = mSurfaceHolder.lockCanvas();
                     mCanvas.save();
                     synchronized (mSurfaceHolder) {
-                        //mGameView.update();
+                        mGameView.update();
                         mGameView.draw(mCanvas);
 
                     }
@@ -51,6 +50,7 @@ public class MainThread extends Thread
             }
         }
     }
+
     public void setRunning(boolean isRunning)
     {
         mRunning = isRunning;

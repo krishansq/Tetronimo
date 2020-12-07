@@ -23,26 +23,6 @@ public class GameState
         piecesList.add(new Pieces(random.nextInt(Piecesamt) + 1));
     }
 
-    public int codeToColor(int x, int y) {
-
-        if (gameBoard[x][y] == 0) return Color.parseColor("#FFFF00");  // Yellow
-        if (gameBoard[x][y] == 1) return Color.parseColor("#00FF00");
-        ; // Square Green
-        if (gameBoard[x][y] == 2) return Color.parseColor("#FF00FF");
-        ; //  zpiece Magenta
-        if (gameBoard[x][y] == 3) return Color.parseColor("#0000FF");
-        ;  // ipiece Blue
-        if (gameBoard[x][y] == 4) return Color.parseColor("#00FFFF");
-        ;  // tpiece Cyan
-        if (gameBoard[x][y] == 5) return Color.parseColor("#ffbf00");
-        ;  // spiece Orange
-        if (gameBoard[x][y] == 6) return Color.parseColor("#BEBEBE");
-        ;  // jpiece gray
-        if (gameBoard[x][y] == 7) return Color.parseColor("#FF0000");
-        ; // lpiece Red
-
-        return -1;
-    }
 
     public void clearBoard() //clears and initializes gameBoard
     {
@@ -70,7 +50,7 @@ public class GameState
         return piecesList.get(piecesList.size() - 1);
     }
 
-    private void placePiece(Pieces currentPiece)
+    public void placePiece(Pieces currentPiece)
     {
         gameBoard[currentPiece.x1][currentPiece.y1] = currentPiece.colorCode;
         gameBoard[currentPiece.x2][currentPiece.y2] = currentPiece.colorCode;
@@ -175,7 +155,7 @@ public class GameState
 
     private boolean moves_left(Pieces currentPiece)
     {
-        if(piece_moves(currentPiece, 0, -1) == true)
+        if(piece_moves(currentPiece, 0, -1))
         {
             return true;
         }
@@ -184,7 +164,7 @@ public class GameState
 
     private boolean moves_right(Pieces currentPiece)
     {
-        if(piece_moves(currentPiece, 0, 1) == true)
+        if(piece_moves(currentPiece, 0, 1))
         {
             return true;
         }
@@ -193,7 +173,16 @@ public class GameState
 
     public boolean moves_down(Pieces currentPiece)
     {
-        if(piece_moves(currentPiece, 1, 0) == true)
+        if(piece_moves(currentPiece, 1, 0))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean moves_up(Pieces currentPiece)
+    {
+        if(piece_moves(currentPiece, -1, 0))
         {
             return true;
         }
@@ -229,15 +218,25 @@ public class GameState
         {
             movePiece(currentPiece, 1, 0);
         }
+
     }
 
+    public void moveUp(Pieces currentPiece)
+    {
+        if(moves_up(currentPiece) == true)
+        {
+            movePiece(currentPiece, -1, 0);
+        }
+
+    }
     public void Drop(Pieces currentPiece)
     {
         deletePiece(currentPiece);
 
-        while(moves_down(currentPiece) == true)
+        while(moves_down(currentPiece))
         {
             moveDown(currentPiece);
+
         }
         placePiece(currentPiece);
     }
@@ -324,6 +323,9 @@ public class GameState
         return gameBoard;
     }
 
+    public void setNextPiece()
+    {
+    }
 //    public void onClick(View view) {
 //
 //        switch (view.getId()) {
