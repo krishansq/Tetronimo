@@ -8,11 +8,9 @@ import android.widget.TextView;
 import android.app.Activity;
 import java.util.Random;
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
-public class GameActivity extends Activity implements View.OnClickListener
-{
+
+public class GameActivity extends Activity implements View.OnClickListener {
     private TetGameView mGameView;
     private ImageButton leftButton;
     private ImageButton rightButton;
@@ -23,22 +21,20 @@ public class GameActivity extends Activity implements View.OnClickListener
     private MainThread mainThread;
     private Random random = new Random();
     private ArrayList<Pieces> pieceList;
-    private Timer timer = new Timer();
-    private Points points;
 
 
-    public GameActivity(Context context, GameState gameState, MainThread mainThread)
-    {
+    public GameActivity(Context context, GameState gameState, MainThread mainThread) {
         super();
-
         this.mainThread = mainThread;
         this.gameState = gameState;
-        points = new Points(context);
 
     }
+    public GameActivity(){
+
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -57,8 +53,6 @@ public class GameActivity extends Activity implements View.OnClickListener
         title = findViewById(R.id.gameTitle);
 
         mGameView = findViewById(R.id.XMLGAMEVIEW);
-
-
     }
 
     @Override
@@ -74,32 +68,23 @@ public class GameActivity extends Activity implements View.OnClickListener
     }
 
     @Override
-    public void onClick(View view)
-    {
-       if(MainThread.getPause() == false)
-       {
-           switch (view.getId()) {
-               case R.id.rButton:
-                   gameState.moveRight(gameState.getCurrentPiece());
-                   break;
-               case R.id.lButton:
-                   gameState.moveLeft(gameState.getCurrentPiece());
-                   break;
-               case R.id.lcButton:
-                   gameState.Drop(gameState.getCurrentPiece());
-                   break;
-               case R.id.rcButton:
-                   gameState.rotate(gameState.getCurrentPiece());
-                   break;
-           }
-       }
-       public Timer getTimer()
-        {
-            return this.timer;
-        }
+    public void onClick(View view) {
+
+            switch (view.getId()) {
+                case R.id.rButton:
+                    gameState.moveRight(gameState.getCurrentPiece());
+                    break;
+                case R.id.lButton:
+                    gameState.moveLeft(gameState.getCurrentPiece());
+                    break;
+                case R.id.lcButton:
+                    gameState.Drop(gameState.getCurrentPiece());
+                    break;
+                case R.id.rcButton:
+                    gameState.rotate(gameState.getCurrentPiece());
+                    break;
+            }
     }
 }
-
-
 
 

@@ -32,7 +32,7 @@ public class MainThread extends Thread
                     mCanvas = mSurfaceHolder.lockCanvas();
                     mCanvas.save();
                     synchronized (mSurfaceHolder) {
-                        mGameView.update();
+                        //mGameView.update();
                         mGameView.draw(mCanvas);
 
                     }

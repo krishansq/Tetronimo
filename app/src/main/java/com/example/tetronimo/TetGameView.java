@@ -1,4 +1,3 @@
-
 package com.example.tetronimo;
 
 import android.content.Context;
@@ -60,29 +59,33 @@ public class TetGameView extends SurfaceView {
 
     public void update()
     {
-        mGameState.clearBoard();
+//        mGameState.clearBoard();
     }
 
     @Override
     public void draw(Canvas canvas) {
-        int rowDivider = this.getMeasuredHeight() / 24;
-        int colDivider = this.getMeasuredWidth() / 10;
-
+        float rectHeight = (float)this.getMeasuredHeight() / mGameState.ROWS;
+        float rectWidth = (float)this.getMeasuredWidth() / mGameState.COLS;
         super.draw(canvas);
         paint.setColor(Color.CYAN);
-        paint.setStrokeWidth(3);
-        for(int i = 0; i < 24; i++)
+
+        for(int i = 0; i < mGameState.ROWS; i++)
         {
-            canvas.drawLine(0, i*rowDivider, this.getMeasuredWidth(), i*rowDivider, paint);
+            for(int j = 0; j < mGameState.COLS; j++)
+            {
+                if(mGameState.getGameBoard()[i][j] > 0 && mGameState.getGameBoard()[i][j] < 8)
+                {
+                    canvas.drawRect(j * rectWidth, i * rectHeight, (j + 1) * rectWidth, (i + 1) * rectHeight, paint);
+                }
+            }
         }
 
-        for(int i = 0; i < 10; i++)
-        {
-            canvas.drawLine(i*colDivider, 0, i*colDivider, this.getMeasuredHeight(), paint);
-        }
+
     }
 
 }
+
+
 
 
 

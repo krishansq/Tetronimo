@@ -27,19 +27,24 @@
                 android:src="@drawable/ic_baseline_arrow_back_24" />
 
             <ImageButton
-                android:id="@+id/cButton"
+                android:id="@+id/lcButton"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:src="@drawable/ic_baseline_arrow_downward_24" />
 
             <ImageButton
-                android:id="@+id/rButton"
+                android:id="@+id/rcButton"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:src="@drawable/ic_baseline_arrow_forward_24" />
-
+                android:src="@drawable/ic_baseline_rotate_right_24" />
+        <ImageButton
+            android:id="@+id/rButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/ic_baseline_arrow_forward_24" />
     </LinearLayout>
 
 

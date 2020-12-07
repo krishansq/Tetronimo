@@ -1,14 +1,17 @@
 package com.example.tetronimo;
 
+import android.graphics.Color;
 import android.graphics.Point;
+import android.view.View;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
 public class GameState
 {
-    private final int ROWS = 24;
-    private final int COLS = 10;
+    public final int ROWS = 24;
+    public final int COLS = 10;
     private int gameBoard[][] = new int[ROWS][COLS];
     private final Random random = new Random();
     private ArrayList<Pieces> piecesList = new ArrayList<Pieces>();
@@ -18,6 +21,27 @@ public class GameState
     {
         piecesList.add(new Pieces(random.nextInt(Piecesamt) + 1));
         piecesList.add(new Pieces(random.nextInt(Piecesamt) + 1));
+    }
+
+    public int codeToColor(int x, int y) {
+
+        if (gameBoard[x][y] == 0) return Color.parseColor("#FFFF00");  // Yellow
+        if (gameBoard[x][y] == 1) return Color.parseColor("#00FF00");
+        ; // Square Green
+        if (gameBoard[x][y] == 2) return Color.parseColor("#FF00FF");
+        ; //  zpiece Magenta
+        if (gameBoard[x][y] == 3) return Color.parseColor("#0000FF");
+        ;  // ipiece Blue
+        if (gameBoard[x][y] == 4) return Color.parseColor("#00FFFF");
+        ;  // tpiece Cyan
+        if (gameBoard[x][y] == 5) return Color.parseColor("#ffbf00");
+        ;  // spiece Orange
+        if (gameBoard[x][y] == 6) return Color.parseColor("#BEBEBE");
+        ;  // jpiece gray
+        if (gameBoard[x][y] == 7) return Color.parseColor("#FF0000");
+        ; // lpiece Red
+
+        return -1;
     }
 
     public void clearBoard() //clears and initializes gameBoard
@@ -295,13 +319,26 @@ public class GameState
         return false;
     }
 
-    public int getROWS()
+    public int[][] getGameBoard()
     {
-        return this.ROWS;
+        return gameBoard;
     }
 
-    public int getCOLS()
-    {
-        return this.COLS;
-    }
+//    public void onClick(View view) {
+//
+//        switch (view.getId()) {
+//            case R.id.rButton:
+//                this.moveRight(this.getCurrentPiece());
+//                break;
+//            case R.id.lButton:
+//                this.moveLeft(this.getCurrentPiece());
+//                break;
+//            case R.id.lcButton:
+//                this.Drop(this.getCurrentPiece());
+//                break;
+//            case R.id.rcButton:
+//                this.rotate(this.getCurrentPiece());
+//                break;
+//        }
+//    }
 }
