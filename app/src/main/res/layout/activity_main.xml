@@ -45,12 +45,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:src="@drawable/ic_baseline_arrow_forward_24" />
-<!--        <ImageButton-->
-<!--            android:id="@+id/dropButton"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_weight="1"-->
-<!--            android:src="@drawable/ic_baseline_arrow_drop_down_circle_24" />-->
+
     </LinearLayout>
 
 <!--Places the TetGameView in the center of the screen-->
