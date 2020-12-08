@@ -1,6 +1,6 @@
 package com.example.tetronimo;
 
-public class Pieces
+public class Pieces //Each type of game piece is created in this class, and handles block rotation
 {
     public int colorCode;
     public int x1, y1;
@@ -18,7 +18,7 @@ public class Pieces
         this.y3 = pieces.y3; this.y4 = pieces.y4;
     }
 
-    //create a block based on the colorCode
+    //create a block based on the colorCode, but colorCode never actually implemented
     public Pieces(int f)
     {
         switch(f)
@@ -88,7 +88,7 @@ public class Pieces
         }
     }
 
-    public void move(int x, int y)
+    public void move(int x, int y) //changes coordinates of each rect
     {
         x1 = x1 + x;
         y1 = y1 + y;

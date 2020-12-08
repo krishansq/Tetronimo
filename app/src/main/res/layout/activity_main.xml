@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
-
+<!--    game title-->
     <ImageView
         android:id="@+id/gameTitle"
         android:layout_width="fill_parent"
@@ -13,7 +13,7 @@
         android:src="@drawable/title"
         />
 
-
+<!--layout containing all four buttons-->
     <LinearLayout
         android:id="@+id/button_layout"
         android:layout_width="fill_parent"
@@ -39,12 +39,12 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:src="@drawable/ic_baseline_arrow_upward_24" />
-        <ImageButton
-            android:id="@+id/rButton"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@drawable/ic_baseline_arrow_forward_24" />
+            <ImageButton
+                android:id="@+id/rButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/ic_baseline_arrow_forward_24" />
 <!--        <ImageButton-->
 <!--            android:id="@+id/dropButton"-->
 <!--            android:layout_width="0dp"-->
@@ -53,7 +53,7 @@
 <!--            android:src="@drawable/ic_baseline_arrow_drop_down_circle_24" />-->
     </LinearLayout>
 
-
+<!--Places the TetGameView in the center of the screen-->
     <com.example.tetronimo.TetGameView
         android:id="@+id/XMLGAMEVIEW"
         android:layout_width="fill_parent"

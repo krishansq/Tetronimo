@@ -63,7 +63,7 @@ public class GameActivity extends Activity implements View.OnClickListener {
     }
 
     @Override
-    public void onClick(View view) {
+    public void onClick(View view) { //handles button inputs and sends the result to the view class
 
             switch (view.getId()) {
                 case R.id.lButton:

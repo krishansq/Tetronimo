@@ -7,7 +7,7 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-
+//This class is what draws the game board
 public class TetGameView extends SurfaceView {
     //private boolean mRunning;
     Paint paint = new Paint();
@@ -16,7 +16,7 @@ public class TetGameView extends SurfaceView {
     SurfaceHolder mSurfaceHolder;
     Context mContext;
 
-    public TetGameView(Context context) {
+    public TetGameView(Context context) { //necessary constructors
         super(context);
         init(context);
     }
@@ -31,7 +31,7 @@ public class TetGameView extends SurfaceView {
         init(context);
     }
 
-    private void init(Context context) {
+    private void init(Context context) { //initiates the view
         mContext = context;
         mSurfaceHolder = getHolder();
         setFocusable(true);
@@ -41,7 +41,7 @@ public class TetGameView extends SurfaceView {
 
 
 
-    public void pause() {
+    public void pause() { //pause method, not used currently
         mGameThread.setRunning(false);
         try {
             // Stop the thread (rejoin the main thread)
@@ -50,14 +50,14 @@ public class TetGameView extends SurfaceView {
         }
     }
 
-    public void resume() {
+    public void resume() { //resume method, not used currently
 
         mGameThread = new MainThread(this, mSurfaceHolder);
         mGameThread.setRunning(true);
         mGameThread.start();
     }
 
-    public void update()
+    public void update() //updates the gamestate before drawing
     {
 
         if(!mGameState.checkGame(mGameState.getCurrentPiece()))
@@ -71,7 +71,7 @@ public class TetGameView extends SurfaceView {
 
 
     @Override
-    public void draw(Canvas canvas) {
+    public void draw(Canvas canvas) { //draws rectangles where they are indicated in the gameboard array
         float rectHeight = (float)this.getMeasuredHeight() / mGameState.ROWS;
         float rectWidth = (float)this.getMeasuredWidth() / mGameState.COLS;
         super.draw(canvas);
@@ -92,7 +92,7 @@ public class TetGameView extends SurfaceView {
 
     }
 
-    public void buttonMove(int buttonID) {
+    public void buttonMove(int buttonID) { //method that calls methods based on button output passed in
         switch (buttonID) {
             case 1:
 
@@ -113,11 +113,6 @@ public class TetGameView extends SurfaceView {
 
                 mGameState.moveRight(mGameState.getCurrentPiece());
                 break;
-//
-//            case 5:
-//
-//                mGameState.Drop(mGameState.getCurrentPiece());
-//                break;
         }
     }
 

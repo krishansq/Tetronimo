@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-public class GameState
+public class GameState //all game logic is enclosed in this class
 {
     public final int ROWS = 24;
     public final int COLS = 10;
-    private int gameBoard[][] = new int[ROWS][COLS];
+    private int gameBoard[][] = new int[ROWS][COLS]; //gameboard that determines where rectangles are placed
     private final Random random = new Random();
     private ArrayList<Pieces> piecesList = new ArrayList<Pieces>();
     private final int Piecesamt = 7;
@@ -43,14 +43,14 @@ public class GameState
     public Pieces getCurrentPiece()
     {
         return piecesList.get(piecesList.size() - 2);
-    }
+    } // returns current piece
 
     public Pieces getNextPiece()
     {
         return piecesList.get(piecesList.size() - 1);
     }
 
-    public void placePiece(Pieces currentPiece)
+    public void placePiece(Pieces currentPiece) //places piece on gameboard
     {
         gameBoard[currentPiece.x1][currentPiece.y1] = currentPiece.colorCode;
         gameBoard[currentPiece.x2][currentPiece.y2] = currentPiece.colorCode;
@@ -58,7 +58,7 @@ public class GameState
         gameBoard[currentPiece.x4][currentPiece.y4] = currentPiece.colorCode;
     }
 
-    private void deletePiece(Pieces currentPiece)
+    private void deletePiece(Pieces currentPiece) //deletes piece on gameboard
     {
         gameBoard[currentPiece.x1][currentPiece.y1] = 0;
         gameBoard[currentPiece.x2][currentPiece.y2] = 0;
@@ -153,7 +153,7 @@ public class GameState
         return false;
     }
 
-    private boolean moves_left(Pieces currentPiece)
+    private boolean moves_left(Pieces currentPiece) //checks if piece can move left
     {
         if(piece_moves(currentPiece, 0, -1))
         {
@@ -162,7 +162,7 @@ public class GameState
         return false;
     }
 
-    private boolean moves_right(Pieces currentPiece)
+    private boolean moves_right(Pieces currentPiece) //checks if piece can move right
     {
         if(piece_moves(currentPiece, 0, 1))
         {
@@ -171,7 +171,7 @@ public class GameState
         return false;
     }
 
-    public boolean moves_down(Pieces currentPiece)
+    public boolean moves_down(Pieces currentPiece) //checks if piece can move down
     {
         if(piece_moves(currentPiece, 1, 0))
         {
@@ -180,7 +180,7 @@ public class GameState
         return false;
     }
 
-    public boolean moves_up(Pieces currentPiece)
+    public boolean moves_up(Pieces currentPiece) //checks if piece can move up, used for in-class demo but not intended for final game
     {
         if(piece_moves(currentPiece, -1, 0))
         {
@@ -189,14 +189,14 @@ public class GameState
         return false;
     }
 
-    private void movePiece(Pieces currentPiece, int x, int y)
+    private void movePiece(Pieces currentPiece, int x, int y) //called by move<direction> methods
     {
         deletePiece(currentPiece);
         currentPiece.move(x, y);
         placePiece(currentPiece);
     }
 
-    public void moveLeft(Pieces currentPiece)
+    public void moveLeft(Pieces currentPiece) //moves a piece left
     {
         if(moves_left(currentPiece) == true)
         {
@@ -204,7 +204,7 @@ public class GameState
         }
     }
 
-    public void moveRight(Pieces currentPiece)
+    public void moveRight(Pieces currentPiece) //moves a piece right
     {
         if(moves_right(currentPiece) == true)
         {
@@ -212,7 +212,7 @@ public class GameState
         }
     }
 
-    public void moveDown(Pieces currentPiece)
+    public void moveDown(Pieces currentPiece) //moves a piece down
     {
         if(moves_down(currentPiece) == true)
         {
@@ -221,7 +221,7 @@ public class GameState
 
     }
 
-    public void moveUp(Pieces currentPiece)
+    public void moveUp(Pieces currentPiece) //moves a piece up
     {
         if(moves_up(currentPiece) == true)
         {
@@ -229,7 +229,7 @@ public class GameState
         }
 
     }
-    public void Drop(Pieces currentPiece)
+    public void Drop(Pieces currentPiece) //drops a piece to bottom of board, not used in demo
     {
         deletePiece(currentPiece);
 
@@ -241,7 +241,7 @@ public class GameState
         placePiece(currentPiece);
     }
 
-    public void rotate(Pieces currentPiece)
+    public void rotate(Pieces currentPiece) //rotates a piece clockwise, not used in demo
     {
         if(piece_rotates(currentPiece) == true && currentPiece.colorCode != 1)
         {
@@ -252,7 +252,7 @@ public class GameState
         placePiece(currentPiece);
     }
 
-    public int clearRows()
+    public int clearRows() //determines which row can be cleared
     {
         int RowIndex;
         int deletedRows = 0;
@@ -300,7 +300,7 @@ public class GameState
         return deletedRows;
     }
 
-    public void deleteRow(int r)
+    public void deleteRow(int r) //deletes all blocks on a row
     {
         for(int i = 0; i < COLS; i++)
         {
@@ -308,7 +308,7 @@ public class GameState
         }
     }
 
-    public boolean checkGame(Pieces gamePieces)
+    public boolean checkGame(Pieces gamePieces) //checks if a new piece can be put on the view
     {
         if(moves_down(gamePieces) == false && gamePieces.getMinXCoordinate(
                 gamePieces.x1, gamePieces.x2, gamePieces.x3, gamePieces.x4) <= 1)
@@ -321,26 +321,8 @@ public class GameState
     public int[][] getGameBoard()
     {
         return gameBoard;
-    }
+    } //returns gameboard
 
-    public void setNextPiece()
-    {
-    }
-//    public void onClick(View view) {
-//
-//        switch (view.getId()) {
-//            case R.id.rButton:
-//                this.moveRight(this.getCurrentPiece());
-//                break;
-//            case R.id.lButton:
-//                this.moveLeft(this.getCurrentPiece());
-//                break;
-//            case R.id.lcButton:
-//                this.Drop(this.getCurrentPiece());
-//                break;
-//            case R.id.rcButton:
-//                this.rotate(this.getCurrentPiece());
-//                break;
-//        }
-//    }
+
+
 }
