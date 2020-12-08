@@ -50,7 +50,7 @@ public class TetGameView extends SurfaceView {
         }
     }
 
-    public void resume() { //resume method, not used currently
+    public void resume() { //resume method, news up a main thread
 
         mGameThread = new MainThread(this, mSurfaceHolder);
         mGameThread.setRunning(true);
