@@ -51,13 +51,13 @@ public class GameActivity extends Activity implements View.OnClickListener {
     }
 
     @Override
-    protected void onPause() {
+    protected void onPause() { //currently unused
         super.onPause();
         mGameView.pause();
     }
 
     @Override
-    protected void onResume() {
+    protected void onResume() { //starts up game
         super.onResume();
         mGameView.resume();
     }
@@ -78,9 +78,7 @@ public class GameActivity extends Activity implements View.OnClickListener {
                 case R.id.rButton:
                     mGameView.buttonMove(4);
                     break;
-//                case R.id.dropButton:
-//                    mGameView.buttonMove(5);
-//                    break;
+
             }
     }
 }
