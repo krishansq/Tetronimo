@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.app.Activity;
 import java.util.Random;
@@ -12,14 +13,8 @@ import java.util.ArrayList;
 
 public class GameActivity extends Activity implements View.OnClickListener {
     private TetGameView mGameView;
-    private ImageButton leftButton;
-    private ImageButton rightButton;
-    private ImageButton leftcenterButton;
-    private ImageButton rightcenterButton;
-    private TextView title;
     private GameState gameState;
     private MainThread mainThread;
-    private Random random = new Random();
     private ArrayList<Pieces> pieceList;
 
 
@@ -38,19 +33,19 @@ public class GameActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        leftButton = findViewById(R.id.lButton);
+        ImageButton leftButton = findViewById(R.id.lButton);
         leftButton.setOnClickListener(this);
 
-        rightButton = findViewById(R.id.rButton);
+        ImageButton rightButton = findViewById(R.id.rButton);
         rightButton.setOnClickListener(this);
 
-        leftcenterButton = findViewById(R.id.lcButton);
+        ImageButton leftcenterButton = findViewById(R.id.lcButton);
         leftcenterButton.setOnClickListener(this);
 
-        rightcenterButton = findViewById(R.id.rcButton);
+        ImageButton rightcenterButton = findViewById(R.id.rcButton);
         rightcenterButton.setOnClickListener(this);
 
-        title = findViewById(R.id.gameTitle);
+        ImageView title = findViewById(R.id.title);
 
         mGameView = findViewById(R.id.XMLGAMEVIEW);
     }
@@ -68,21 +63,24 @@ public class GameActivity extends Activity implements View.OnClickListener {
     }
 
     @Override
-    public void onClick(View view) {
+    public void onClick(View view) { //handles button inputs and sends the result to the view class
 
             switch (view.getId()) {
-                case R.id.rButton:
-                    gameState.moveRight(gameState.getCurrentPiece());
-                    break;
                 case R.id.lButton:
-                    gameState.moveLeft(gameState.getCurrentPiece());
+                    mGameView.buttonMove(1);
                     break;
                 case R.id.lcButton:
-                    gameState.Drop(gameState.getCurrentPiece());
+                    mGameView.buttonMove(2);
                     break;
                 case R.id.rcButton:
-                    gameState.rotate(gameState.getCurrentPiece());
+                    mGameView.buttonMove(3);
                     break;
+                case R.id.rButton:
+                    mGameView.buttonMove(4);
+                    break;
+//                case R.id.dropButton:
+//                    mGameView.buttonMove(5);
+//                    break;
             }
     }
 }

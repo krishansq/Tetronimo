@@ -3,36 +3,35 @@ package com.example.tetronimo;
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;
 
-public class MainThread extends Thread
+import java.util.TimerTask;
+
+public class MainThread extends Thread //overloads thread class to implement a better run method
 {
     private SurfaceHolder mSurfaceHolder;
     private TetGameView mGameView;
     private boolean mRunning;
     public static Canvas mCanvas;
 
-    public MainThread(TetGameView gameView, SurfaceHolder surfaceHolder)
+    public MainThread(TetGameView gameView, SurfaceHolder surfaceHolder) //constructs thread
     {
         super();
         this.mSurfaceHolder = surfaceHolder;
         this.mGameView = gameView;
     }
 
-    @Override
-    public void run()
+    public void run () //runs the program by updating the gameboard and drawing on the canvas
     {
 
-        while (mRunning)
-        {
+        while (mRunning) { //try catch blocks aren't totally necessary, but useful for increasing amount of threads and more complex game
 
             mCanvas = null;
-            if (mSurfaceHolder.getSurface().isValid())
-            {
+            if (mSurfaceHolder.getSurface().isValid()) {
 
                 try {
                     mCanvas = mSurfaceHolder.lockCanvas();
                     mCanvas.save();
                     synchronized (mSurfaceHolder) {
-                        //mGameView.update();
+                        mGameView.update();
                         mGameView.draw(mCanvas);
 
                     }
@@ -51,9 +50,10 @@ public class MainThread extends Thread
             }
         }
     }
+
     public void setRunning(boolean isRunning)
     {
         mRunning = isRunning;
-    }
+    } //sets mrunning to what is passed in
 
 }
